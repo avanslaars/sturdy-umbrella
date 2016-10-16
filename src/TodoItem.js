@@ -6,4 +6,9 @@ const TodoItem = (props) => {
   )
 }
 
+TodoItem.propTypes = {
+  name: React.PropTypes.string,
+  isComplete: React.PropTypes.bool
+}
+
 export default TodoItem
