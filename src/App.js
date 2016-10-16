@@ -6,12 +6,19 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      currentTodo: '',
       todos: [
         {id: 1, name: 'Add a state', isComplete: true},
         {id: 2, name: 'Render based on state', isComplete: true},
         {id: 3, name: 'Update the state', isComplete: false}
       ]
     }
+
+    this.handleTodoChange = this.handleTodoChange.bind(this)
+  }
+
+  handleTodoChange(evt) {
+    this.setState({currentTodo: evt.target.value})
   }
 
   render() {
@@ -23,7 +30,7 @@ class App extends Component {
         </div>
         <div className="Todo-App">
           <form>
-            <input type="text"/>
+            <input type="text" onChange={this.handleTodoChange} value={this.state.currentTodo}/>
           </form>
           <div className="TodoList">
             <ul>
