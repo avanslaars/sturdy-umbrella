@@ -4,24 +4,36 @@ import './App.css';
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
+import {AddItem, GenerateId} from './Helpers'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       currentTodo: '',
-      todos: [
-        {id: 1, name: 'Add a state', isComplete: true},
-        {id: 2, name: 'Render based on state', isComplete: true},
-        {id: 3, name: 'Update the state', isComplete: false}
-      ]
+      todos: []
     }
 
     this.handleTodoChange = this.handleTodoChange.bind(this)
+    this.handleTodoSubmit = this.handleTodoSubmit.bind(this)
   }
 
   handleTodoChange(evt) {
     this.setState({currentTodo: evt.target.value})
+  }
+
+  handleTodoSubmit(evt) {
+    evt.preventDefault()
+    const newTodo = {
+      id:GenerateId(),
+      name: this.state.currentTodo,
+      isComplete:false
+    }
+    const updatedTodos = AddItem(this.state.todos, newTodo)
+    this.setState({
+      todos: updatedTodos,
+      currentTodo: ''
+    })
   }
 
   render() {
@@ -32,7 +44,10 @@ class App extends Component {
           <h2>React Todo</h2>
         </div>
         <div className="Todo-App">
-          <TodoForm handleTodoChange={this.handleTodoChange} currentTodo={this.state.currentTodo} />
+          <TodoForm
+            handleSubmit={this.handleTodoSubmit}
+            handleTodoChange={this.handleTodoChange}
+            currentTodo={this.state.currentTodo} />
           <TodoList todos={this.state.todos} />
           <Footer/>
         </div>
