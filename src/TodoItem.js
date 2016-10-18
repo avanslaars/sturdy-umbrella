@@ -1,8 +1,9 @@
 import React from 'react'
+import {partial} from './Helpers'
 
 const TodoItem = (props) => {
   return (
-    <li><input type="checkbox" defaultChecked={props.isComplete}/> {props.name}</li>
+    <li><input type="checkbox" onChange={partial(props.handleToggle, props.id)} defaultChecked={props.isComplete}/> {props.name}</li>
   )
 }
 

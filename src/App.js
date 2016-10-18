@@ -4,7 +4,7 @@ import './App.css';
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
-import {AddItem, GenerateId} from './Helpers'
+import {AddItem, GenerateId, FindById, ToggleTodo, UpdateTodo} from './Helpers'
 
 class App extends Component {
   constructor() {
@@ -17,6 +17,7 @@ class App extends Component {
     this.handleTodoChange = this.handleTodoChange.bind(this)
     this.handleTodoSubmit = this.handleTodoSubmit.bind(this)
     this.handleEmptyTodo = this.handleEmptyTodo.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
   }
 
   handleTodoChange(evt) {
@@ -47,6 +48,15 @@ class App extends Component {
     })
   }
 
+  handleToggle(id) {
+    const targetTodo = FindById(this.state.todos, id)
+    const toggledTodo = ToggleTodo(targetTodo)
+    const updatedTodos = UpdateTodo(this.state.todos, toggledTodo)
+    this.setState({
+        todos: updatedTodos
+    })
+  }
+
   render() {
     const submitHandler = this.state.currentTodo ? this.handleTodoSubmit : this.handleEmptyTodo
     return (
@@ -61,7 +71,7 @@ class App extends Component {
             handleSubmit={submitHandler}
             handleTodoChange={this.handleTodoChange}
             currentTodo={this.state.currentTodo} />
-          <TodoList todos={this.state.todos} />
+        <TodoList todos={this.state.todos} handleToggle={this.handleToggle} />
           <Footer/>
         </div>
       </div>
