@@ -48,9 +48,7 @@ class App extends Component {
   }
 
   render() {
-    const submitHandler = this.state.currentTodo
-      ? this.handleTodoSubmit
-      : this.handleEmptyTodo
+    const submitHandler = this.state.currentTodo ? this.handleTodoSubmit : this.handleEmptyTodo
     return (
       <div className="App">
         <div className="App-header">
