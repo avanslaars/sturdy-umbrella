@@ -16,10 +16,14 @@ class App extends Component {
 
     this.handleTodoChange = this.handleTodoChange.bind(this)
     this.handleTodoSubmit = this.handleTodoSubmit.bind(this)
+    this.handleEmptyTodo = this.handleEmptyTodo.bind(this)
   }
 
   handleTodoChange(evt) {
-    this.setState({currentTodo: evt.target.value})
+    this.setState({
+      currentTodo: evt.target.value,
+      errorMessage: ''
+    })
   }
 
   handleTodoSubmit(evt) {
@@ -36,7 +40,17 @@ class App extends Component {
     })
   }
 
+  handleEmptyTodo(evt) {
+    evt.preventDefault()
+    this.setState({
+      errorMessage: 'You cannot submit an empty todo'
+    })
+  }
+
   render() {
+    const submitHandler = this.state.currentTodo
+      ? this.handleTodoSubmit
+      : this.handleEmptyTodo
     return (
       <div className="App">
         <div className="App-header">
@@ -44,8 +58,9 @@ class App extends Component {
           <h2>React Todo</h2>
         </div>
         <div className="Todo-App">
+          {this.state.errorMessage ? <span className="error">{this.state.errorMessage}</span> : null}
           <TodoForm
-            handleSubmit={this.handleTodoSubmit}
+            handleSubmit={submitHandler}
             handleTodoChange={this.handleTodoChange}
             currentTodo={this.state.currentTodo} />
           <TodoList todos={this.state.todos} />
