@@ -4,7 +4,7 @@ import './App.css';
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
-import {AddItem, GenerateId, FindById, ToggleTodo, UpdateTodo} from './Helpers'
+import {AddItem, GenerateId, FindById, ToggleTodo, UpdateTodo, pipe, partial} from './Helpers'
 
 class App extends Component {
   constructor() {
@@ -49,9 +49,7 @@ class App extends Component {
   }
 
   handleToggle(id) {
-    const targetTodo = FindById(this.state.todos, id)
-    const toggledTodo = ToggleTodo(targetTodo)
-    const updatedTodos = UpdateTodo(this.state.todos, toggledTodo)
+    const updatedTodos = pipe(FindById, ToggleTodo, partial(UpdateTodo, this.state.todos))(this.state.todos, id)
     this.setState({
         todos: updatedTodos
     })

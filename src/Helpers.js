@@ -16,3 +16,7 @@ export const UpdateTodo = (list, updated) => {
 export const FindById = (list, id) => list.find(item => item.id === id)
 
 export const partial = (fn, ...args) => fn.bind(null, ...args)
+
+const _pipe = (f, g) => (...args) => g(f(...args))
+
+export const pipe = (...fns) => fns.reduce(_pipe)

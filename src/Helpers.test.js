@@ -1,4 +1,7 @@
-import {AddItem, ToggleTodo, UpdateTodo, FindById} from './Helpers'
+import {AddItem, ToggleTodo, UpdateTodo, FindById, pipe} from './Helpers'
+
+const inc = (num) => num+1
+const dbl = (num) => num*2
 
 test('AddItem Returns An Updated List', () => {
   const Expected = [1,2,3]
@@ -58,6 +61,12 @@ test('UpdateTodo returns a new list with the specified todo replaced by id', () 
     const result = UpdateTodo(todos, updated)
 
     expect(result).toEqual(expected)
+})
 
+test('pipe passes data through two functions', () => {
+  expect(pipe(inc, dbl)(2)).toEqual(dbl(inc(2)))
+})
 
+test('pipe passes data through n functions', () => {
+  expect(pipe(inc, dbl, inc)(2)).toEqual(inc(dbl(inc(2))))
 })
