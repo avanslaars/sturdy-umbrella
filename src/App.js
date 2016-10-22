@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
@@ -58,20 +56,14 @@ class App extends Component {
   render() {
     const submitHandler = this.state.currentTodo ? this.handleTodoSubmit : this.handleEmptyTodo
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React Todo</h2>
-        </div>
-        <div className="Todo-App">
-          {this.state.errorMessage ? <span className="error">{this.state.errorMessage}</span> : null}
-          <TodoForm
-            handleSubmit={submitHandler}
-            handleTodoChange={this.handleTodoChange}
-            currentTodo={this.state.currentTodo} />
+      <div className="Todo-App">
+        {this.state.errorMessage ? <span className="error">{this.state.errorMessage}</span> : null}
+        <TodoForm
+          handleSubmit={submitHandler}
+          handleTodoChange={this.handleTodoChange}
+          currentTodo={this.state.currentTodo} />
         <TodoList todos={this.state.todos} handleToggle={this.handleToggle} />
-          <Footer/>
-        </div>
+        <Footer/>
       </div>
     );
   }
