@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import logo from './logo.svg';
 import './App.css';
 import App from './App'
-import {Match} from './Router'
+import {Match, Link} from './Router'
 
 const About = (props) => {
   return (
@@ -21,6 +21,11 @@ export default class Main extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>React Todo</h2>
         </div>
+        <div>
+          <Link to='/'>Todo App</Link>
+          <Link to='/about'>About</Link>
+        </div>
+
         <Match pattern='/' component={App} />
         <Match pattern='/about' component={About} />
       </div>
