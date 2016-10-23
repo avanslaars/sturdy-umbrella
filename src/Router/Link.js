@@ -6,9 +6,14 @@ export class Link extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  // Access click handler from the context set by Router component
+  static contextTypes = {
+    linkHandler: React.PropTypes.func
+  }
+
   handleClick(evt) {
     evt.preventDefault()
-    history.pushState(null, null, this.props.to)
+    this.context.linkHandler(this.props.to)
   }
 
   render() {

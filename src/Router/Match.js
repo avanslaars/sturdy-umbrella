@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 
 export class Match extends Component {
+  // Access route from the context set by Router component
+  static contextTypes = {
+    route: React.PropTypes.string
+  }
+
   render() {
-    const path = document.location.pathname
-    const route = path.substring(path.lastIndexOf('/'))
     const Comp = this.props.component
     return (
-      this.props.pattern === route && <Comp />
+      this.props.pattern === this.context.route && <Comp />
     )
   }
 }
