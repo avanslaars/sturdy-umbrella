@@ -19,17 +19,9 @@ const filterTodos = (todos, route) => {
 }
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      currentTodo: '',
-      todos: []
-    }
-
-    this.handleTodoChange = this.handleTodoChange.bind(this)
-    this.handleTodoSubmit = this.handleTodoSubmit.bind(this)
-    this.handleEmptyTodo = this.handleEmptyTodo.bind(this)
-    this.handleToggle = this.handleToggle.bind(this)
+  state = {
+    currentTodo: '',
+    todos: []
   }
 
   // Access click handler from the context set by Router component
@@ -37,14 +29,14 @@ class App extends Component {
     route: React.PropTypes.string
   }
 
-  handleTodoChange(evt) {
+  handleTodoChange = (evt) => {
     this.setState({
       currentTodo: evt.target.value,
       errorMessage: ''
     })
   }
 
-  handleTodoSubmit(evt) {
+  handleTodoSubmit = (evt) => {
     evt.preventDefault()
     const newTodo = {
       id:GenerateId(),
@@ -58,14 +50,14 @@ class App extends Component {
     })
   }
 
-  handleEmptyTodo(evt) {
+  handleEmptyTodo = (evt) => {
     evt.preventDefault()
     this.setState({
       errorMessage: 'You cannot submit an empty todo'
     })
   }
 
-  handleToggle(id) {
+  handleToggle = (id) => {
     const updatedTodos = pipe(FindById, ToggleTodo, partial(UpdateTodo, this.state.todos))(this.state.todos, id)
     this.setState({
         todos: updatedTodos
