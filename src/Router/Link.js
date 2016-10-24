@@ -8,6 +8,7 @@ export class Link extends Component {
 
   // Access click handler from the context set by Router component
   static contextTypes = {
+    route: React.PropTypes.string,
     linkHandler: React.PropTypes.func
   }
 
@@ -17,7 +18,8 @@ export class Link extends Component {
   }
 
   render() {
-    return <a href="#" onClick={this.handleClick}>{this.props.children}</a>
+    const activeClass = this.context.route === this.props.to ? 'active' : ''
+    return <a href="#" className={activeClass} onClick={this.handleClick}>{this.props.children}</a>
   }
 }
 

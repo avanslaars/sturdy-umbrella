@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link} from './Router'
 
 const Footer = (props) => {
   return (
     <div className="Footer">
-      <a href="#">All</a>
-      <a href="#">Active</a>
-      <a href="#">Completed</a>
+      <Link to='/'>All</Link>
+      <Link to='/active'>Active</Link>
+      <Link to='/complete'>Completed</Link>
     </div>
   )
 }

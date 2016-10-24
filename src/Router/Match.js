@@ -14,6 +14,7 @@ export class Match extends Component {
   }
 }
 
+
 Match.propTypes = {
   component: React.PropTypes.func.isRequired,
   pattern: React.PropTypes.string.isRequired
