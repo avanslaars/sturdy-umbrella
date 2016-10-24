@@ -8,6 +8,11 @@ const getCurrentPath = () => {
 export class Router extends Component {
   constructor() {
     super()
+    window.onpopstate = () => {
+      this.setState({
+        route: getCurrentPath()
+      })
+    }
     this.state = {
       route: getCurrentPath()
     }
