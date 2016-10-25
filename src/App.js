@@ -5,6 +5,7 @@ import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
 import {AddItem, GenerateId, FindById, ToggleTodo, UpdateTodo, pipe, partial} from './Helpers'
+import {loadTodos} from './todoService'
 
 const filterTodos = (todos, route) => {
   switch (route) {
@@ -62,6 +63,12 @@ class App extends Component {
     this.setState({
         todos: updatedTodos
     })
+  }
+
+  componentDidMount() {
+    loadTodos()
+      .then(todos => this.setState({todos}))
+      .catch(err => this.setState({errorMessage: err.message}))
   }
 
   render() {

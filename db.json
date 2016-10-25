@@ -1,0 +1,20 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "name": "Plan Lesson",
+      "isComplete": true
+    },
+    {
+      "id": 2,
+      "name": "Record Lesson",
+      "isComplete": false
+    },
+    {
+      "id": 3,
+      "name": "Publish Lesson",
+      "isComplete": false
+    }
+
+  ]
+}
