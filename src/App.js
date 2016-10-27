@@ -5,7 +5,7 @@ import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
 import {AddItem, GenerateId, FindById, ToggleTodo, UpdateTodo, pipe, partial} from './Helpers'
-import {loadTodos} from './todoService'
+import {loadTodos, addTodo} from './todoService'
 
 const filterTodos = (todos, route) => {
   switch (route) {
@@ -15,7 +15,6 @@ const filterTodos = (todos, route) => {
       return todos.filter(t => t.isComplete)
     default:
       return todos
-
   }
 }
 
@@ -40,15 +39,18 @@ class App extends Component {
   handleTodoSubmit = (evt) => {
     evt.preventDefault()
     const newTodo = {
-      id:GenerateId(),
+      id: GenerateId(),
       name: this.state.currentTodo,
       isComplete:false
     }
-    const updatedTodos = AddItem(this.state.todos, newTodo)
-    this.setState({
-      todos: updatedTodos,
-      currentTodo: ''
-    })
+    addTodo(newTodo)
+      .then(data => {
+        const updatedTodos = AddItem(this.state.todos, data)
+        this.setState({
+          todos: updatedTodos,
+          currentTodo: ''
+        })
+      })
   }
 
   handleEmptyTodo = (evt) => {
